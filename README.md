@@ -2,14 +2,11 @@
 A property and event management app
 
 ## Setup
-### Forking
-*If you're not forking this repo then skip this portion.*  
-
 **Prerequisites**
 1. An Azure Subscription
 2. The az cli installed  
 
-**Secret Setup**  
+**Secrets Setup**  
 You will need to create a service principal to be able to run the Github Actions (CI/CD).  
 1. Run in your terminal `az ad sp create-for-rbac --name myApp --role contributor --scopes /subscriptions/{subscription-id} --sdk-auth`
 2. Copy the output
@@ -17,3 +14,10 @@ You will need to create a service principal to be able to run the Github Actions
 4. Paste the output into a secret with the value `AZURE_CREDENTIALS`
 5. Create a secret called `AZURE_RG` that is the name of your resource group
 6. Create a secret called `AZURE_SUBSCRIPTION` that is the value of your subscription id
+
+**Provisioning Environment**  
+To create your environment in Azure you will need to run the provision-environment workflow from a manual `workflow_dispatch` kickoff.  When selecting this you will need to choose the region/location that you want to deploy to, and which environment you wish to provision.
+
+## Deleting environment
+### $${\color{red}Warning \space this \space cannot \space be \space undone!}$$	
+To remove the environment from Azure you will need to run the teardown-environment workflow from a manual `workflow_dispatch` kickoff.
