@@ -35,12 +35,12 @@ jobs:
           with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-        # Deploy Bicep file
-        - name: deploy
+        # Deploy Resource group file
+        - name: Create resource group
           uses: azure/arm-deploy@v1
           with:
             subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
             scope: subscription
             region: ${{ inputs.resourcegroup-location }}
-            parameters: location=${{ inputs.resourcegroup-location }} resourceGroupName=${{ secrets.AZURE_RG }}
+            parameters: location=${{ inputs.resourcegroup-location }} resourceGroupName=${{ inputs.environment }}-${{ secrets.AZURE_RG }}-rg
             template: ${{ github.workspace }}/infrastructure/main.bicep
