@@ -1,0 +1,26 @@
+name: Provision environment
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+        description: Select the environment
+      resourcegroup-location:
+        type: choice
+        description: Select the location
+        options:
+          - "eastus"
+          - "westus"
+          - "centralus"
+          - "southcentralus"
+          - "northeurope"
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        steps:
+        
+        - name: Run the command
+          run: |
+            echo hello
